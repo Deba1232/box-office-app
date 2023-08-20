@@ -1,7 +1,7 @@
 const AppTitle = (props) => {
   const {
     title = "Box Office",
-    subtitle = "Are you looking for movie or actor?",
+    subtitle = "Are you looking for TV show or actor?",
   } = props;
 
   return (
