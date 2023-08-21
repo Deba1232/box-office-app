@@ -1,26 +1,27 @@
 import { useState } from "react";
 
-import { searchShow } from "../api/tvMaze";
+import { searchShow, searchActor } from "../api/tvMaze";
+import SearchForm from "../components/SearchForm";
 
 const Home = () => {
-  const [searchStr, setSearchStr] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [apiDataError, setApiDataError] = useState(null);
 
-  // console.log(searchData);
+  // console.log(searchOption);
 
-  const onSearchInput = (event) => {
-    setSearchStr(event.target.value);
-  };
-
-  const onSearch = async (event) => {
-    event.preventDefault();
-
+  const onSearch = async ({ searchStr, searchOption }) => {
     try {
       setApiDataError(null);
 
-      const result = await searchShow(searchStr);
-      setSearchData(result);
+      if (searchOption === "shows") {
+        const showData = await searchShow(searchStr);
+        setSearchData(showData);
+      }
+
+      if (searchOption === "actors") {
+        const actorData = await searchActor(searchStr);
+        setSearchData(actorData);
+      }
     } catch (error) {
       setApiDataError(error);
     }
@@ -31,10 +32,14 @@ const Home = () => {
       return <div>Error occured: {apiDataError.message}</div>;
     }
 
-    if (searchData) {
-      return searchData.map((data) => (
-        <div key={data.show.id}>{data.show.name}</div>
-      ));
+    if (searchData.length !== 0) {
+      return searchData[0].show
+        ? searchData.map((data) => (
+            <div key={data.show.id}>{data.show.name}</div>
+          ))
+        : searchData.map((data) => (
+            <div key={data.person.id}>{data.person.name}</div>
+          ));
     }
 
     return null;
@@ -42,12 +47,8 @@ const Home = () => {
 
   return (
     <div>
-      <form onSubmit={onSearch}>
-        <input type="text" value={searchStr} onChange={onSearchInput} />
-        <button type="submit" onClick={onSearch}>
-          Search
-        </button>
-      </form>
+      <SearchForm onSearch={onSearch} />
+
       <div>{renderData()}</div>
     </div>
   );
