@@ -42,14 +42,6 @@ const Home = () => {
       ) : (
         <ActorList actors={searchData} />
       );
-
-      // return searchData[0].show
-      //   ? searchData.map((data) => (
-      //       <div key={data.show.id}>{data.show.name}</div>
-      //     ))
-      //   : searchData.map((data) => (
-      //       <div key={data.person.id}>{data.person.name}</div>
-      //     ));
     }
     return null;
   };
