@@ -1,32 +1,15 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 
-import { searchShowById } from "../api/tvMaze";
-
-const useShowById = (showId) => {
-  const [showData, setShowData] = useState(null);
-  const [apiFetchError, setApiFetchError] = useState(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await searchShowById(showId);
-        setShowData(data);
-        console.log(data);
-      } catch (error) {
-        setApiFetchError(error);
-      }
-    }
-
-    fetchData();
-  }, [showId]);
-
-  return { showData, apiFetchError };
-};
+import { getShowById } from "../api/tvMaze";
 
 const Show = () => {
   const { showId } = useParams();
-  const { showData, apiFetchError } = useShowById(showId);
+
+  const { data: showData, error: apiFetchError } = useQuery({
+    queryKey: ["show", showId],
+    queryFn: () => getShowById(showId),
+  });
 
   if (apiFetchError) {
     return <div>Error : {apiFetchError.message}</div>;

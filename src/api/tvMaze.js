@@ -9,4 +9,4 @@ export const searchShow = (query) => apiData(`/search/shows?q=${query}`);
 
 export const searchActor = (query) => apiData(`/search/people?q=${query}`);
 
-export const searchShowById = (showId) => apiData(`/shows/${showId}`);
+export const getShowById = (showId) => apiData(`/shows/${showId}`);
