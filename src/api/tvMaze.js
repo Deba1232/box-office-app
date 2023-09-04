@@ -5,8 +5,8 @@ const apiData = async(queryString) => {
     return response.json();
 }
 
-export const searchShow = async (query) =>
-  await apiData(`/search/shows?q=${query}`);
+export const searchShow = (query) => apiData(`/search/shows?q=${query}`);
 
-export const searchActor = async(query) => 
-  await apiData(`/search/people?q=${query}`);
+export const searchActor = (query) => apiData(`/search/people?q=${query}`);
+
+export const searchShowById = (showId) => apiData(`/shows/${showId}`);
