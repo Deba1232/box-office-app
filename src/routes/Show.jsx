@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useQuery } from "react-query";
 
 import { getShowById } from "../api/tvMaze";
@@ -23,6 +23,8 @@ const Show = () => {
   if (showData) {
     return (
       <div>
+        <Link to="/">Go back to home</Link>
+
         <ShowMainData
           image={showData.image}
           name={showData.name}

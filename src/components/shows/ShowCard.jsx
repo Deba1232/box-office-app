@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 const ShowCard = ({ id, image, name, summary }) => {
   return (
     <div>
@@ -16,7 +14,9 @@ const ShowCard = ({ id, image, name, summary }) => {
       </p>
 
       <div>
-        <Link to={`/show/${id}`}>Read more</Link>
+        <a href={`/show/${id}`} target="_blank" rel="noreferrer">
+          Read more
+        </a>
         <button>Starred</button>
       </div>
     </div>
