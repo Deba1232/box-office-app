@@ -17,7 +17,7 @@ const Cast = ({ cast }) => {
 
             <div>
               {item.person.name} | {item.character.name}{" "}
-              {item.voice && "Voiceover"}
+              {item.voice && "(Voiceover)"}
             </div>
           </div>
         );
