@@ -1,4 +1,4 @@
-const ShowCard = ({ id, image, name, summary }) => {
+const ShowCard = ({ id, image, name, summary, onStarClick }) => {
   return (
     <div>
       <div>
@@ -17,7 +17,7 @@ const ShowCard = ({ id, image, name, summary }) => {
         <a href={`/show/${id}`} target="_blank" rel="noreferrer">
           Read more
         </a>
-        <button>Starred</button>
+        <button onClick={() => onStarClick(id)}>Starred</button>
       </div>
     </div>
   );
