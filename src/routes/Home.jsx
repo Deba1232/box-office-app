@@ -20,7 +20,7 @@ const Home = () => {
     refetchOnWindowFocus: false,
   });
 
-  const onSearch = async ({ searchStr, searchOption }) => {
+  const onSearch = ({ searchStr, searchOption }) => {
     setFilter({ searchStr, searchOption });
   };
 
