@@ -1,8 +1,9 @@
 import { useQuery } from "react-query";
 
+import ShowList from "../components/shows/ShowList";
 import { useStarredShows } from "../lib/useStarredShows";
 import { getMultipleShowsById } from "../api/tvMaze";
-import ShowList from "../components/shows/ShowList";
+import { TextCenter } from "../components/commonStyles/TextCenter";
 
 const Starred = () => {
   const [starredShowsIds] = useStarredShows();
@@ -17,18 +18,18 @@ const Starred = () => {
   });
 
   if (apiDataError) {
-    return <div>Error occured: {apiDataError.message}</div>;
+    return <TextCenter>Error occured: {apiDataError.message}</TextCenter>;
   }
 
   if (starredShows?.length === 0) {
-    return <div> No shows were starred </div>;
+    return <TextCenter> No shows were starred </TextCenter>;
   }
 
   if (starredShows?.length > 0) {
     return <ShowList shows={starredShows} />;
   }
 
-  return <div>Loading...</div>;
+  return <TextCenter>Loading...</TextCenter>;
 };
 
 export default Starred;

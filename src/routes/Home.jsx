@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 
 import { searchShow, searchActor } from "../api/tvMaze";
+import { TextCenter } from "../components/commonStyles/TextCenter";
 
 import SearchForm from "../components/SearchForm";
 import ShowList from "../components/shows/ShowList";
@@ -26,11 +27,11 @@ const Home = () => {
 
   const renderData = () => {
     if (apiDataError) {
-      return <div>Error occured: {apiDataError.message}</div>;
+      return <TextCenter>Error occured: {apiDataError.message}</TextCenter>;
     }
 
     if (searchData?.length === 0) {
-      return <div>No results</div>;
+      return <TextCenter>No results</TextCenter>;
     }
 
     if (searchData) {
