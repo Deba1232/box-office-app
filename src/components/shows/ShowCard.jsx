@@ -1,9 +1,26 @@
 import styled from "styled-components";
+import { useRef } from "react";
 
 import { SearchImgWrapper, SearchCard } from "../commonStyles/SearchCardStyle";
 import { StarIcon } from "../commonStyles/StarIcon";
 
 const ShowCard = ({ id, image, name, summary, onStarClick, isStarred }) => {
+  const starBtnRef = useRef();
+
+  const handleStarClick = () => {
+    onStarClick(id);
+
+    const starBtnEl = starBtnRef.current;
+
+    if (!starBtnEl) return;
+
+    if (isStarred) {
+      starBtnEl.classList.remove("animate");
+    } else {
+      starBtnEl.classList.add("animate");
+    }
+  };
+
   return (
     <SearchCard>
       <SearchImgWrapper>
@@ -22,7 +39,7 @@ const ShowCard = ({ id, image, name, summary, onStarClick, isStarred }) => {
         <a href={`/show/${id}`} target="_blank" rel="noreferrer">
           Read more
         </a>
-        <StarBtn onClick={() => onStarClick(id)}>
+        <StarBtn ref={starBtnRef} onClick={handleStarClick}>
           <StarIcon active={isStarred} />
         </StarBtn>
       </ActionSection>
@@ -58,5 +75,21 @@ const StarBtn = styled.button`
   align-items: center;
   &:hover {
     cursor: pointer;
+  }
+  &.animate {
+    ${StarIcon} {
+      animation: increase 0.75s ease-in forwards;
+      @keyframes increase {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+    }
   }
 `;
